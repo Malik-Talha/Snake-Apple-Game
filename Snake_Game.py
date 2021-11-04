@@ -13,11 +13,11 @@ velocity_y = 0
 snake_x = 10
 snake_y = 10
 score = 0
-speed = 10
+speed = 5
 apple_x = random.randint(10, display_width - 10)
 apple_y = random.randint(10, display_height - 10)
 snake_size = 15
-fps = 30
+fps = 60
 
 # Color specification
 white = (255,255,255)
@@ -63,6 +63,15 @@ while not game_exit:
 
     # drawing apple 
     pygame.draw.rect(gameWindow, red, [apple_x, apple_y, snake_size, snake_size])
+    # keeping the snake in the screen
+    if snake_x < 0:
+        snake_x = display_width
+    elif snake_x >= display_width:
+        snake_x = 0
+    if snake_y < 0:
+        snake_y = display_height
+    elif snake_y >= display_height:
+        snake_y = 0
     # drawing snake
     pygame.draw.rect(gameWindow,black, [snake_x, snake_y, snake_size, snake_size])
     pygame.display.update()
