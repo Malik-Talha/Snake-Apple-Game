@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -11,6 +12,9 @@ velocity_x = 0
 velocity_y = 0
 snake_x = 10
 snake_y = 10
+score = 0
+apple_x = random.randint(10, display_width - 10)
+apple_y = random.randint(10, display_height - 10)
 snake_size = 15
 fps = 30
 
@@ -49,6 +53,16 @@ while not game_exit:
     # creating a rectangle
     snake_x += velocity_x
     snake_y += velocity_y
+    # if snake eats apple
+    if abs(apple_x - snake_x) < 8 and abs(apple_y - snake_y) <8:
+        score += 1 
+        print("Score:\t" + str(score))
+        apple_x = random.randint(10, display_width - 10)
+        apple_y = random.randint(10, display_height - 10)
+
+    # drawing apple 
+    pygame.draw.rect(gameWindow, red, [apple_x, apple_y, snake_size, snake_size])
+    # drawing snake
     pygame.draw.rect(gameWindow,black, [snake_x, snake_y, snake_size, snake_size])
     pygame.display.update()
     # Filling background 
