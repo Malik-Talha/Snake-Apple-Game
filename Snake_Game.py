@@ -13,6 +13,7 @@ velocity_y = 0
 snake_x = 10
 snake_y = 10
 score = 0
+speed = 10
 apple_x = random.randint(10, display_width - 10)
 apple_y = random.randint(10, display_height - 10)
 snake_size = 15
@@ -38,16 +39,16 @@ while not game_exit:
         # if event is a pressing of any key
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                velocity_x = 5
+                velocity_x = speed
                 velocity_y = 0
             elif event.key == pygame.K_LEFT:
-                velocity_x = -5
+                velocity_x = -speed
                 velocity_y = 0
             elif event.key == pygame.K_DOWN:
-                velocity_y = 5
+                velocity_y = speed
                 velocity_x = 0
             elif event.key == pygame.K_UP:
-                velocity_y = -5
+                velocity_y = -speed
                 velocity_x = 0
     
     # creating a rectangle
