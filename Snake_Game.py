@@ -30,6 +30,13 @@ def plot_snake(gameWindow, color, snake_list):
     for x, y in snake_list:
         pygame.draw.rect(gameWindow, color, [x,y,snake_size,snake_size])
 
+# define font module
+font = pygame.font.SysFont(None, 60)
+
+def text_screen(text, color, x , y):
+    screen_text = font.render(text,True, color)
+    gameWindow.blit(screen_text, [x,y])
+
 # defining clock
 clock = pygame.time.Clock()
 # setting display size
@@ -63,7 +70,6 @@ while not game_exit:
     # if snake eats apple
     if abs(apple_x - snake_x) < 20 and abs(apple_y - snake_y) <20:
         score += 1 
-        print("Score:\t" + str(score))
         apple_x = random.randint(10, display_width - 10)
         apple_y = random.randint(10, display_height - 10)
         snake_length += speed
@@ -87,7 +93,7 @@ while not game_exit:
     if len(snake_list) > snake_length:
         del snake_list[0]
     plot_snake(gameWindow, black, snake_list)
-    
+    text_screen("Score: " + str(score), red, 5, 5)
     pygame.display.update()
     # Filling background 
     gameWindow.fill(white)
