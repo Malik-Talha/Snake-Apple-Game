@@ -17,6 +17,8 @@ speed = 5
 apple_x = random.randint(10, display_width - 10)
 apple_y = random.randint(10, display_height - 10)
 snake_size = 30
+snake_list = []
+snake_length = 1
 fps = 60
 
 # Color specification
@@ -24,8 +26,9 @@ white = (255,255,255)
 red = (255,0,0)
 black = (0,0,0)
 
-def plot_snake(gameWindow, color, x,y):
-    pygame.draw.rect(gameWindow, color, [x,y,snake_size,snake_size])
+def plot_snake(gameWindow, color, snake_list):
+    for x, y in snake_list:
+        pygame.draw.rect(gameWindow, color, [x,y,snake_size,snake_size])
 
 # defining clock
 clock = pygame.time.Clock()
@@ -63,9 +66,10 @@ while not game_exit:
         print("Score:\t" + str(score))
         apple_x = random.randint(10, display_width - 10)
         apple_y = random.randint(10, display_height - 10)
-
+        snake_length += speed
     # drawing apple 
     pygame.draw.rect(gameWindow, red, [apple_x, apple_y, snake_size, snake_size])
+    
     # keeping the snake in the screen
     if snake_x < 0:
         snake_x = display_width
@@ -76,7 +80,13 @@ while not game_exit:
     elif snake_y >= display_height:
         snake_y = 0
     # drawing snake
-    plot_snake(gameWindow, black, snake_x, snake_y)
+    head = []
+    head.append(snake_x)
+    head.append(snake_y)
+    snake_list.append(head)
+    if len(snake_list) > snake_length:
+        del snake_list[0]
+    plot_snake(gameWindow, black, snake_list)
     
     pygame.display.update()
     # Filling background 
