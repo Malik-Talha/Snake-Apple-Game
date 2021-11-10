@@ -57,17 +57,21 @@ def game_loop():
             # if event is a pressing of any key
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    velocity_x = speed
-                    velocity_y = 0
+                    if velocity_x != -speed:
+                        velocity_x = speed
+                        velocity_y = 0
                 elif event.key == pygame.K_LEFT:
-                    velocity_x = -speed
-                    velocity_y = 0
+                    if velocity_x != speed:
+                        velocity_x = -speed
+                        velocity_y = 0
                 elif event.key == pygame.K_DOWN:
-                    velocity_y = speed
-                    velocity_x = 0
+                    if velocity_y != -speed:
+                        velocity_y = speed
+                        velocity_x = 0
                 elif event.key == pygame.K_UP:
-                    velocity_y = -speed
-                    velocity_x = 0
+                    if velocity_y != speed:
+                        velocity_y = -speed
+                        velocity_x = 0
         
         # creating a rectangle
         snake_x += velocity_x
