@@ -114,7 +114,7 @@ def game_loop():
         elif snake_y >= display_height:
             snake_y = 0
         
-        text_screen("Score: " + str(score), red, 5, 5)
+        text_screen("Score: " + str(score), [0,255,0], 5, 5)
         pygame.display.update()
         # Filling background 
         gameWindow.fill(white)
