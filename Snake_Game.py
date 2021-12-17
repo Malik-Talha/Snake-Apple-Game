@@ -87,7 +87,9 @@ def game_loop():
                     if velocity_y != speed:
                         velocity_y = -speed
                         velocity_x = 0
-        
+        # Filling background 
+        gameWindow.fill(white)
+
         head = []
         snake_x += velocity_x
         snake_y += velocity_y
@@ -103,6 +105,15 @@ def game_loop():
             snake_length += speed
         # drawing apple 
         pygame.draw.rect(gameWindow, red, [apple[0], apple[1], apple_size, apple_size])
+
+        # if snakes bites itself then Game Over
+        for list in snake_list[:-1]:
+            if head[0][0] == list[0][0] and head[0][1] == list[0][1]:   
+                game_exit = True
+
+        # if head[0] in snake_list:
+        #     game_exit = True
+        #     text_screen("Game over", [0,255,0], 5, 5)
         
         # keeping the snake in the screen
         if snake_x < 0:
@@ -113,12 +124,19 @@ def game_loop():
             snake_y = display_height
         elif snake_y >= display_height:
             snake_y = 0
+
         
         text_screen("Score: " + str(score), [0,255,0], 5, 5)
         pygame.display.update()
-        # Filling background 
-        gameWindow.fill(white)
         clock.tick(fps)
+
+    # after the game over
+    text_x = display_width/2-90
+    text_y = display_height/2-40
+    text_screen("Game over", [255,10,10], text_x, text_y)  
+    text_screen("Score: " + str(score), [255,10,10], text_x+25, text_y+50)  
+    pygame.display.update()
+
 game_loop()
 pygame.quit()
 quit()
